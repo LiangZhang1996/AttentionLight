@@ -17,7 +17,7 @@ DIC_AGENTS = {
     "FRAP": MPLightAgent,
 
     "MaxQueue": MaxQueueAgent,
-    "QLMPLight": MPLightAgent,
+    "QLFRAP": MPLightAgent,
     "QLCoLight": CoLightAgent,
     "QLDQN": SimpleDQNAgentOne,
 }
@@ -34,9 +34,9 @@ dic_traffic_env_conf = {
 
     "LIST_MODEL": ["Fixedtime",  "MaxPressure", "MaxQueue", "FRAP",
                    "PressLight", "CoLight", "MPLight",
-                   "QLMPLight", "QLCoLight", "QLDQN"],
+                   "QLFRAP", "QLCoLight", "QLDQN"],
     "LIST_MODEL_NEED_TO_UPDATE": ["PressLight", "FRAP", "CoLight", "MPLight",
-                                  "QLMPLight", "QLCoLight", "QLDQN"],
+                                  "QLFRAP", "QLCoLight", "QLDQN"],
 
     "FORGET_ROUND": 20,
     "RUN_COUNTS": 3600,

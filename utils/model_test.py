@@ -59,7 +59,7 @@ def test(model_dir, cnt_round, run_cnt, _dic_traffic_env_conf):
 
                 if dic_traffic_env_conf["MODEL_NAME"] in ["PressLight", "CoLight",
                                                                "MPLight", "FRAP",
-                                                               "QLMPLight", "QLCoLight", "QLDQN"]:
+                                                               "QLFRAP", "QLCoLight", "QLDQN"]:
                     one_state = state
                     action_list = agents[i].choose_action(step_num, one_state)
                 else:

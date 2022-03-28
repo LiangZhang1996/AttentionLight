@@ -51,9 +51,7 @@ class Generator:
             step_start_time = time.time()
             for i in range(self.dic_traffic_env_conf["NUM_AGENTS"]):
 
-                if self.dic_traffic_env_conf["MODEL_NAME"] in ["PressLight", "CoLight",
-                                                               "MPLight", "FRAP",
-                                                               "QLFRAP", "QLCoLight", "QLDQN"]:
+                if self.dic_traffic_env_conf["MODEL_NAME"] in ["PressLight", "GAT", "DQN", "FRAP", "Attention"]:
                     one_state = state
                     action = self.agents[i].choose_action(step_num, one_state)
                     action_list = action

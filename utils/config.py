@@ -1,10 +1,11 @@
 from models.fixedtime_agent import FixedtimeAgent
 from models.maxpressure_agent import MaxPressureAgent
-from models.maxqueue_agent import MaxQueueAgent
-from models.mplight_agent import MPLightAgent
-from models.colight_agent import CoLightAgent
+from models.max_queuelength_agent import MaxQLAgent
+from models.frap_agent import FRAPAgent
+from models.gat_agent import GATAgent
 from models.presslight_one import PressLightAgentOne
 from models.simple_dqn_one import SimpleDQNAgentOne
+from models.attention_light_agent import AttentionLightAgent
 
 
 DIC_AGENTS = {
@@ -12,14 +13,12 @@ DIC_AGENTS = {
     "MaxPressure": MaxPressureAgent,
 
     "PressLight": PressLightAgentOne,
-    "CoLight": CoLightAgent,
-    "MPLight": MPLightAgent,
-    "FRAP": MPLightAgent,
+    "GAT": GATAgent,
+    "FRAP": FRAPAgent,
 
-    "MaxQueue": MaxQueueAgent,
-    "QLFRAP": MPLightAgent,
-    "QLCoLight": CoLightAgent,
-    "QLDQN": SimpleDQNAgentOne,
+    "MaxQL": MaxQLAgent,
+    "DQN": SimpleDQNAgentOne,
+    "Attention": AttentionLightAgent
 }
 
 DIC_PATH = {
@@ -32,11 +31,9 @@ DIC_PATH = {
 
 dic_traffic_env_conf = {
 
-    "LIST_MODEL": ["Fixedtime",  "MaxPressure", "MaxQueue", "FRAP",
-                   "PressLight", "CoLight", "MPLight",
-                   "QLFRAP", "QLCoLight", "QLDQN"],
-    "LIST_MODEL_NEED_TO_UPDATE": ["PressLight", "FRAP", "CoLight", "MPLight",
-                                  "QLFRAP", "QLCoLight", "QLDQN"],
+    "LIST_MODEL": ["Fixedtime",  "MaxPressure", "MaxQL", "FRAP",
+                   "PressLight", "DQN", "GAT", "Attention"],
+    "LIST_MODEL_NEED_TO_UPDATE": ["PressLight", "FRAP", "GAT", "Attention", "DQN"],
 
     "FORGET_ROUND": 20,
     "RUN_COUNTS": 3600,

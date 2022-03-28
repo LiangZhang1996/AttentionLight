@@ -17,7 +17,7 @@ def parse_args():
     parser.add_argument("-workers",     type=int,               default=3)
     parser.add_argument("-hangzhou",    action="store_true",    default=False)
     parser.add_argument("-jinan",       action="store_true",    default=True)
-
+    parser.add_argument("-newyork", action="store_true", default=False)
     return parser.parse_args()
 
 
@@ -33,6 +33,11 @@ def main(in_args):
         traffic_file_list = ["anon_3_4_jinan_real.json", "anon_3_4_jinan_real_2000.json",
                              "anon_3_4_jinan_real_2500.json"]
         template = "Jinan"
+    elif in_args.newyork:
+        count = 3600
+        road_net = "28_7"
+        traffic_file_list = ["anon_28_7_newyork_real_double.json", "anon_28_7_newyork_real_triple.json"]
+        template = "newyork_28_7"
 
     NUM_ROW = int(road_net.split('_')[0])
     NUM_COL = int(road_net.split('_')[1])

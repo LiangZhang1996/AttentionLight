@@ -1,16 +1,18 @@
 ## 1. Introduction
 
-Offical code for article [Knowledge intensive state design for traffic signal control](http://arxiv.org/abs/2201.00006).
+Offical code for article [AttentionLight: Rethinking queue length and attention mechanism for traffic signal control](http://arxiv.org/abs/2201.00006).
 
 If you use our method, please cite our article.
 ```latex
-@misc{zhang2021knowledge,
-      title={Knowledge intensive state design for traffic signal control}, 
-      author={Liang Zhang and Qiang Wu and Jianming Deng},
-      year={2021},
-      eprint={2201.00006},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@misc{https://doi.org/10.48550/arxiv.2201.00006,
+
+title = {AttentionLight: Rethinking queue length and attention mechanism for traffic signal control},
+author = {Zhang, Liang and Wu, Qiang and Deng, Jianming},
+publisher = {arXiv},
+  
+year = {2022},
+  
+copyright = {arXiv.org perpetual, non-exclusive license}
 }
 ```
 
@@ -24,7 +26,7 @@ If you use our method, please cite our article.
 
 For the method in our article, run:
 ```shell
-python run_maxqueue.py
+python run_max_ql.py
 ```
 ```shell
 python run_ql_dqn.py
@@ -33,7 +35,7 @@ python run_ql_dqn.py
 python run_ql_frap.py
 ```
 ```shell
-python run_ql_colight.py
+python run_ql_gat.py
 ```
 
 For the baseline methods,

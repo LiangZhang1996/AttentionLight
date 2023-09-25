@@ -1,7 +1,7 @@
 ## 1. Introduction
 
 
-Official code for article [Leveraging Queue Length and Attention Mechanisms for Enhanced Traffic Signal Control Optimization]([http://arxiv.org/abs/2201.00006](https://doi.org/10.1007/978-3-031-43430-3_9)).
+Official code for article [Leveraging Queue Length and Attention Mechanisms for Enhanced Traffic Signal Control Optimization](https://doi.org/10.1007/978-3-031-43430-3_9).
 
 This article has been received by ECML PKDD 2023.
 

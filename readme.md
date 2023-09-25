@@ -1,30 +1,32 @@
 ## 1. Introduction
 
-Offical code for article [AttentionLight: Rethinking queue length and attention mechanism for traffic signal control](http://arxiv.org/abs/2201.00006).
+
+Official code for article [Leveraging Queue Length and Attention Mechanisms for Enhanced Traffic Signal Control Optimization]([http://arxiv.org/abs/2201.00006](https://doi.org/10.1007/978-3-031-43430-3_9)).
+
+This article has been received by ECML PKDD 2023.
 
 If you use our method, please cite our article.
 ```latex
-@misc{https://doi.org/10.48550/arxiv.2201.00006,
-
-title = {AttentionLight: Rethinking queue length and attention mechanism for traffic signal control},
-author = {Zhang, Liang and Wu, Qiang and Deng, Jianming},
-publisher = {arXiv},
-  
-year = {2022},
-  
-copyright = {arXiv.org perpetual, non-exclusive license}
+@inproceedings{attentionlight,
+  title={Leveraging Queue Length and Attention Mechanisms for Enhanced Traffic Signal Control Optimization},
+  author={Zhang, Liang and Xie, Shubin and Deng, Jianming},
+  booktitle={Joint European Conference on Machine Learning and Knowledge Discovery in Databases},
+  pages={141--156},
+  year={2023},
+  organization={Springer}
 }
+
 ```
 
-## 2. Rquirements
+## 2. Requirements
 `python3.6`,`tensorflow=2.4`, `cityflow`, `pandas`, `numpy`
 
-[`cityflow`](https://github.com/cityflow-project/CityFlow.git) needs a linux environment, and we run the code on Manjaro Linux.
+[`cityflow`](https://github.com/cityflow-project/CityFlow.git) needs a Linux environment, and we run the code on Manjaro Linux.
 
 
 ## 3. Quick start
 
-For the method in our article, run:
+For the method in our article, run the following:
 ```shell
 python run_max_ql.py
 ```
@@ -76,8 +78,8 @@ python summary.py
 ### 4.2、Reference
 
 The code is modified from [Efficient_XLight](https://github.com/LiangZhang1996/Efficient_XLight.git).
-The `Max-Pressure` is created by ourselves, based on [MaxPressure](https://www.sciencedirect.com/science/article/pii/S0968090X13001782) .
-- `PressLight`: Bsed on `LIT` model, which comes from [Colight](https://github.com/wingsweihua/colight.git).
+The `Max-Pressure` is created by ourselves, based on [MaxPressure](https://www.sciencedirect.com/science/article/pii/S0968090X13001782).
+- `PressLight`: Based on `LIT` model, which comes from [Colight](https://github.com/wingsweihua/colight.git).
 - `Colight` : Based on [Colight](https://github.com/wingsweihua/colight.git).
 - `Fixed-Time`: From [MPLight](https://github.com/Chacha-Chen/MPLight.git).
 - `MPLight`: From [MPLight](https://github.com/Chacha-Chen/MPLight.git).

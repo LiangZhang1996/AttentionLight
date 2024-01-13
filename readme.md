@@ -28,6 +28,9 @@ If you use our method, please cite our article.
 
 For the method in our article, run the following:
 ```shell
+python run_attention_light.py
+```
+```shell
 python run_max_ql.py
 ```
 ```shell
@@ -66,7 +69,7 @@ python run_frap.py
 python run_colight.py
 ```
 ### 3.1 Evaluate the results
-Change the folder name in `summary.py` as yours, and run: 
+Change the folder name in `summary.py` to yours, and run: 
 ```shell
 python summary.py
 ```

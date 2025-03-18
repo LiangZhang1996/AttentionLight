@@ -1,3 +1,4 @@
+from math import sqrt
 import pickle
 import numpy as np
 import json
@@ -334,7 +335,7 @@ class CityFlowEnv:
         print(" ============= self.eng.reset() to be implemented ==========")
         cityflow_config = {
             "interval": self.dic_traffic_env_conf["INTERVAL"],
-            "seed": 0,
+            "seed": self.dic_traffic_env_conf["SEED"],
             "laneChange": True,
             "dir": self.path_to_work_directory+"/",
             "roadnetFile": self.dic_traffic_env_conf["ROADNET_FILE"],
@@ -427,7 +428,7 @@ class CityFlowEnv:
             self.log(cur_time=instant_time, before_action_feature=before_action_feature, action=action_in_sec_display)
             next_state, done = self.get_state()
 
-        print("Step time: ", time.time() - step_start_time)
+        # print("Step time: ", time.time() - step_start_time)
         return next_state, reward, done, average_reward_action_list
 
     def _inner_step(self, action):
@@ -491,7 +492,14 @@ class CityFlowEnv:
             path_to_log_file = os.path.join(self.path_to_log, "vehicle_inter_{0}.csv".format(inter_ind))
             dic_vehicle = self.list_intersection[inter_ind].get_dic_vehicle_arrive_leave_time()
             df = pd.DataFrame.from_dict(dic_vehicle, orient="index")
+            att=self.eng.get_average_travel_time()
+            df.insert(df.shape[1], 'eng-att', att)   # 追加一列，记录从engin获取的 att
             df.to_csv(path_to_log_file, na_rep="nan")
+        # save eng.att into file
+        att=self.eng.get_average_travel_time()
+        print(f"CityFlowEnv.batch_log_2 att:{att}")
+        with open(os.path.join(self.path_to_log, "eng-att.txt"), "w") as f:
+            f.write(str(att))
 
     def batch_log(self, start, stop):
         for inter_ind in range(start, stop):
@@ -501,12 +509,19 @@ class CityFlowEnv:
             path_to_log_file = os.path.join(self.path_to_log, "vehicle_inter_{0}.csv".format(inter_ind))
             dic_vehicle = self.list_intersection[inter_ind].get_dic_vehicle_arrive_leave_time()
             df = pd.DataFrame.from_dict(dic_vehicle, orient="index")
+            att=self.eng.get_average_travel_time()
+            df.insert(df.shape[1], 'eng-att', att)   # 追加一列，记录从engin获取的 att
             df.to_csv(path_to_log_file, na_rep="nan")
             
             path_to_log_file = os.path.join(self.path_to_log, "inter_{0}.pkl".format(inter_ind))
             f = open(path_to_log_file, "wb")
             pickle.dump(self.list_inter_log[inter_ind], f)
             f.close()
+        # save eng.att into file
+        print(f"CityFlowEnv.batch_log_2 att:{att}")
+        with open(os.path.join(self.path_to_log, "eng-att.txt"), "w") as f:
+            f.write(str(att))
+
 
     def bulk_log_multi_process(self, batch_size=100):
         assert len(self.list_intersection) == len(self.list_inter_log)
@@ -614,7 +629,24 @@ class CityFlowEnv:
 
         for road in roads:
             points = road["points"]
-            road_length = abs(points[0]['x'] + points[0]['y'] - points[1]['x'] - points[1]['y'])
+            # road_length = abs(points[0]['x'] + points[0]['y'] - points[1]['x'] - points[1]['y'])
+            """
+            TODO
+            上面计算方式有问题，比如
+            "id": "road_20_1_1",
+            "points": [
+                {
+                "x": 5700,
+                "y": 0
+                },
+                {
+                "x": 5400,
+                "y": 300
+                }
+            ],
+            """
+            road_length = sqrt((points[0]['x']-points[1]['x'])**2 + (points[0]['y']-points[1]['y'])**2) # 要求 int 吗？
+            assert road_length>0, 'Error road length(' + str(road_length) +') is too short. road info: ' + str(road)
             for i in range(3):
                 lane_id = road['id'] + "_{0}".format(i)
                 lanes_length_dict[lane_id] = road_length
@@ -623,3 +655,9 @@ class CityFlowEnv:
         for key, value in lanes_length_dict.items():
             lane_normalize_factor[key] = value / min_length
         return lane_normalize_factor, lanes_length_dict
+
+    def get_avg_travel_time(self):
+        """
+        get average travel time
+        """
+        return self.eng.get_average_travel_time()

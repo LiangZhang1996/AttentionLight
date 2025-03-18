@@ -7,13 +7,18 @@ import argparse
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--memo",       type=str,               default='benchmark_1001')
+    parser.add_argument("--memo",       type=str, default='maxp_56_6')
+    parser.add_argument("-seed",    type=int,            default=6)
     parser.add_argument("-model",       type=str,               default="MaxPressure")
-    parser.add_argument("-eightphase", action="store_true",     default=False)
-    parser.add_argument("-multi_process", action="store_true",  default=True)
-    parser.add_argument("-workers",     type=int,               default=3)
+    parser.add_argument("-eightphase", action="store_true",     default=True)
+    parser.add_argument("-multi_process", action="store_true",  default=False)
+    parser.add_argument("-workers",     type=int,               default=1)
+    parser.add_argument("-r34", action="store_true", default=False)
+    parser.add_argument("-r54", action="store_true", default=False)
+    parser.add_argument("-r56", action="store_true", default=True)
+    parser.add_argument("-r45", action="store_true", default=False)
     parser.add_argument("-hangzhou",    action="store_true",    default=False)
-    parser.add_argument("-jinan",       action="store_true",    default=True)
+    parser.add_argument("-jinan",       action="store_true",    default=False)
     parser.add_argument("-newyork", action="store_true", default=False)
     return parser.parse_args()
 
@@ -37,7 +42,35 @@ def main(in_args):
         road_net = "28_7"
         traffic_file_list = ["anon_28_7_newyork_real_double.json", "anon_28_7_newyork_real_triple.json"]
         template = "newyork_28_7"
-
+    elif in_args.r34:
+        num_rounds = 80
+        count = 3600
+        road_net = "3_4"
+        traffic_file_list = ["flow_3_4.json"]
+        template = "3_4"
+    elif in_args.r45:
+        num_rounds = 80
+        count = 3600
+        road_net = "4_5"
+        traffic_file_list = ["flow_4_5.json"]
+        template = "4_5"
+    elif in_args.r54:
+        num_rounds = 80
+        count = 3600
+        road_net = "5_4"
+        traffic_file_list = ["flow_5_4.json"]
+        template = "5_4"
+    elif in_args.r56:
+        num_rounds = 80
+        count = 3600
+        road_net = "5_6"
+        traffic_file_list = ["flow_5_6.json"]
+        template = "5_6"
+    else:
+        count = 3600
+        road_net = "33_34"
+        traffic_file_list = ["flow_33_34.json"]
+        template = "33_34"
     NUM_ROW = int(road_net.split('_')[0])
     NUM_COL = int(road_net.split('_')[1])
     num_intersections = NUM_ROW * NUM_COL
@@ -47,6 +80,7 @@ def main(in_args):
 
     for traffic_file in traffic_file_list:
         dic_traffic_env_conf_extra = {
+            "SEED": in_args.seed,
             "NUM_AGENTS": num_intersections,
             "NUM_INTERSECTIONS": num_intersections,
 

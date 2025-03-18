@@ -14,7 +14,9 @@ class NetworkAgent(Agent):
     def __init__(self, dic_agent_conf, dic_traffic_env_conf, dic_path, cnt_round, intersection_id="0"):
         super(NetworkAgent, self).__init__(
             dic_agent_conf, dic_traffic_env_conf, dic_path, intersection_id=intersection_id)
-
+        seed=dic_traffic_env_conf["SEED"]
+        np.random.seed(seed)
+        random.seed(seed)
         # ===== check num actions == num phases ============
         self.num_actions = len(dic_traffic_env_conf["PHASE"])
         self.num_phases = len(dic_traffic_env_conf["PHASE"])

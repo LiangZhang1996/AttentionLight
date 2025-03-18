@@ -9,7 +9,7 @@ import random
 class Updater:
 
     def __init__(self, cnt_round, dic_agent_conf, dic_traffic_env_conf, dic_path):
-
+        random.seed(dic_traffic_env_conf["SEED"])
         self.cnt_round = cnt_round
         self.dic_path = dic_path
         self.dic_traffic_env_conf = dic_traffic_env_conf
